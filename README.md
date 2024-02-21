@@ -1,16 +1,6 @@
-# Simple MEXC TradingView Bot Example With PENDAX
+# MEXC TradingView Signal Bot 
 
-This repository contains a Node.js application designed to interface with MEXC Exchange using the PENDAX SDK. It is specifically built to handle very simple webhooks from TradingView, process the incoming trading signals, and execute trades on the MEXC Exchange accordingly.
-
-## Features
-
-- Processes TradingView webhook signals.
-- Executes trades on MEXC Exchange based on signals.
-- Validates incoming trading signals for format and feasibility.
-
-## Getting Started
-
-These instructions will guide you on how to set up and run the application on your local machine for development and testing purposes.
+Node.js application specifically built to handle webhooks from TradingView, process the incoming trading signals, and execute trades on the MEXC Exchange.
 
 ### Prerequisites
 
@@ -18,16 +8,6 @@ These instructions will guide you on how to set up and run the application on yo
 - npm (Node.js package manager)
 - A MEXC Exchange account with API access
 
-### Installation
-
- Clone the repository to your local machine
-
-     git clone https://github.com/grimyfishtank/Simple-MEXC-TradingView-Bot.git
-
- Navigate to cloned directory
-
-     cd Simple-MEXC-TradingView-Bot
- 
  Install the required Node.js packages
 
      npm install

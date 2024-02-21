@@ -2,18 +2,16 @@ const express = require('express');
 const { createExchange } = require('@compendiumfi/pendax');
 require('dotenv').config();
 
-// This Code Needs Further Review And Testing. Please Use With Caution
+
 
 const app = express();
 app.use(express.json());
 
-// Initialize the MEXC exchange object using PENDAX SDK
 const mexcClient = createExchange({
     exchange: "mexc",
     authenticate: true,
     key: process.env.MEXC_API_KEY,
     secret: process.env.MEXC_API_SECRET
-    // Add other necessary authentication details
 });
 
 app.post('/webhook', async (req, res) => {
@@ -30,7 +28,6 @@ app.post('/webhook', async (req, res) => {
 
 async function processTradeSignal(signal, symbol, quantity) {
     try {
-        // Validate and format the input
         if (!['buy', 'sell'].includes(signal.toLowerCase())) {
             throw new Error("Invalid signal. Signal must be 'buy' or 'sell'.");
         }
@@ -55,15 +52,12 @@ async function processTradeSignal(signal, symbol, quantity) {
 }
 
 function calculateTradeSize(accountInfo, symbol, side, quantityPct) {
-    // Split the symbol at '-' to get base and quote assets
     const [baseAsset, quoteAsset] = symbol.split('-');
 
     let asset;
     if (side === 'BUY') {
-        // For BUY orders, use the quote currency (e.g., USDT in MANGO-USDT)
         asset = quoteAsset;
     } else {
-        // For SELL orders, use the base currency (e.g., MANGO in MANGO-USDT)
         asset = baseAsset;
     }
 
@@ -73,9 +67,8 @@ function calculateTradeSize(accountInfo, symbol, side, quantityPct) {
         throw new Error(`Insufficient ${asset} balance`);
     }
 
-    // Calculate the trade size as a percentage of the available balance
     const size = (parseFloat(balance.free) * quantityPct) / 100;
-    return size.toFixed(8); // Assuming 8 decimal places, adjust as needed for MEXC
+    return size.toFixed(8);
 }
 
 const PORT = process.env.PORT || 80;
